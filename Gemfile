@@ -7,9 +7,13 @@ gem 'rails', '3.2.3'
 
 gem 'rails-api'
 
-gem 'sqlite3'
+gem 'pg', group: :production
 
 gem 'rspec-rails'
+
+group :development, :test do
+  gem 'sqlite3'
+end
 
 group :test do
   gem 'nyan-cat-formatter'
