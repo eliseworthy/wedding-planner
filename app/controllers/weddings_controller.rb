@@ -13,7 +13,7 @@ class WeddingsController < ApplicationController
     @wedding = Wedding.new(params[:wedding])
 
     if @wedding.save
-      render json: @wedding, status: :created, location: @wedding
+      render json: @wedding, status: :created
     else
       render json: @wedding.errors, status: :unprocessable_entity
     end

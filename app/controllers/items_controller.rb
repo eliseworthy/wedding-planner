@@ -13,7 +13,8 @@ class ItemsController < ApplicationController
     @item = Item.new(params[:item])
 
     if @item.save
-      render json: @item, status: :created, location: @item
+      render json: @item, status: :created
+
     else
       render json: @item.errors, status: :unprocessable_entity
     end
