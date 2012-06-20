@@ -4,7 +4,6 @@ class CreateWeddings < ActiveRecord::Migration
       t.string :name
       t.integer :user_id
       t.string :description
-      t.string :photo
 
       t.timestamps
     end
