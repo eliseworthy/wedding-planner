@@ -34,6 +34,17 @@ describe WeddingsController do
     it 'renders the show' do
       response.should be_success
     end
+
+    it 'returns a wedding hash' do
+      body = JSON.parse(response.body)
+      body.should == { 
+        "id" => wedding.id,
+        "name" => wedding.name,
+        "description" => wedding.description,
+        "user_id" => wedding.user_id,
+        "created_at" => wedding.created_at.strftime('%FT%TZ')
+      }
+    end
   end
 end
 
