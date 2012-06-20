@@ -46,5 +46,42 @@ describe WeddingsController do
       }
     end
   end
+
+  context 'create' do
+    it "should create a new wedding" do
+      expect {
+        post :create, :wedding => { name: 'Pretty wedding', description: 'Pretty!', user_id: 1}
+      }.to change(Wedding, :count).by 1
+    end
+  end
+
+  context 'update' do
+    it "locates the wedding" do
+      put :update, id: wedding, wedding: Factory.attributes_for(:wedding)
+      assigns(:wedding).should eq(wedding) 
+    end
+
+    it "updates wedding's attributes" do
+      put :update, id: wedding, wedding: Factory.attributes_for(:wedding, description: "Cool!")
+      wedding.reload
+      wedding.description.should eq("Cool!")
+    end
+
+    context "invalid attributes" do
+      it "does not change the wedding's attributes" do
+        put :update, id: wedding, wedding: Factory.attributes_for(:wedding, description: nil)
+        wedding.reload
+        wedding.description.should eq("A great zombie")
+      end
+    end
+  end
+
+  context 'destroy' do
+    it "deletes the contact" do
+      expect{
+        delete :destroy, id: wedding       
+      }.to change(Wedding, :count).by -1
+    end
+  end
 end
 
