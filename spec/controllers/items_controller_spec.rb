@@ -3,12 +3,13 @@ require 'spec_helper'
 describe ItemsController do
   render_views
   
-  let!(:wedding) { FactoryGirl.create(:wedding) }
   let!(:item) { FactoryGirl.create(:item) }
+  let!(:wedding) { item.wedding }
+  let!(:category) { item.category }
 
   context 'index' do
     before(:each) do
-      get :index, :format => :json, wedding_id: wedding.id
+      get :index, :format => :json, wedding_id: wedding.id, category_id: category.id
     end
 
     it 'renders an index' do
@@ -17,13 +18,17 @@ describe ItemsController do
 
     it 'returns an array of items' do
       body = JSON.parse(response.body)
-      body["items"].should eq [{ 
+      body.should == { "items" => [{ 
         "id" => item.id,
         "name" => item.name,
         "description" => item.description,
         "wedding_id" => item.wedding_id,
         "created_at" => item.created_at.strftime('%FT%TZ')
-      }]
+        }],
+        "category" => {
+          "id" => item.category.id,
+          "name" => item.category.name          
+        }}
     end
   end
   context 'show' do
@@ -43,7 +48,11 @@ describe ItemsController do
         "name" => item.name,
         "description" => item.description,
         "wedding_id" => item.wedding_id,
-        "created_at" => item.created_at.strftime('%FT%TZ')
+        "created_at" => item.created_at.strftime('%FT%TZ'),
+        "category" => {
+          "id" => item.category.id,
+          "name" => item.category.name,          
+        }
       }
     end
   end
@@ -51,7 +60,7 @@ describe ItemsController do
   context 'create' do
     it "should create a new item" do
       expect {
-        post :create, wedding_id: wedding.id, :item => { name: 'Pretty item', description: 'Pretty!', wedding_id: 1}
+        post :create, wedding_id: wedding.id, :item => { name: 'Pretty item', description: 'Pretty!', wedding_id: FactoryGirl.create(:wedding).id , category_id: FactoryGirl.create(:category).id }
       }.to change(Item, :count).by 1
     end
   end

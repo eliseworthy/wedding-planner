@@ -2,7 +2,8 @@ class ItemsController < ApplicationController
   respond_to :json
 
   def index
-    @items = Item.all
+    @category = Category.find(params[:category_id])
+    @items = @category.items.where(wedding_id: params[:wedding_id])
   end
 
   def show

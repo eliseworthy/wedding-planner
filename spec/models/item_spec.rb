@@ -12,6 +12,11 @@ describe Item do
     item.should_not be_valid
   end
 
+  it "is not valid without a category_id" do
+    item.category_id = nil
+    item.should_not be_valid
+  end
+
   it "is not valid without a name" do
     item.name = nil
     item.should_not be_valid
