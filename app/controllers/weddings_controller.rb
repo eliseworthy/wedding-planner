@@ -1,18 +1,16 @@
 class WeddingsController < ApplicationController
   # GET /weddings
   # GET /weddings.json
+  respond_to :json
+
   def index
     @weddings = Wedding.all
-
-    render json: @weddings
   end
 
   # GET /weddings/1
   # GET /weddings/1.json
   def show
     @wedding = Wedding.find(params[:id])
-
-    render json: @wedding
   end
 
   # GET /weddings/new

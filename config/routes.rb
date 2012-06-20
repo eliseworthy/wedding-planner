@@ -1,5 +1,5 @@
 WeddingPlanner::Application.routes.draw do
-  resources :weddings, except: :edit
+  resources :weddings, except: :edit, :defaults => { :format => 'json' }
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

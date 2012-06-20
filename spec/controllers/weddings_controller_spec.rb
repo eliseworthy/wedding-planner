@@ -1,23 +1,39 @@
 require 'spec_helper'
 
 describe WeddingsController do
-  let(:wedding) { FactoryGirl.create(:wedding) }
+
+  let!(:wedding) { FactoryGirl.create(:wedding) }
 
   context 'index' do
     before(:each) do
-      wedding
-      get :index
-    end
-    it 'renders an index' do
-      response.should be_successful
+      get :index, :format => :json
     end
 
-    it 'shows all wedding name, description, and user_id' do
-      response.body.should eq [{ 
+    it 'renders an index' do
+      response.should be_success
+    end
+
+    it 'returns an array of weddings' do
+      body = JSON.parse(response.body)
+      raise response.body.inspect
+      body["weddings"].should eq [{ 
         "id" => wedding.id,
         "name" => wedding.name,
-        "description" => wedding.description
+        "description" => wedding.description,
+        "user_id" => wedding.user_id,
+        "created_at" => wedding.created_at
       }]
     end
   end
+  context 'show' do
+    before(:each) do
+      wedding
+      get :show, format: :json, id: wedding.id
+    end
+
+    it 'renders the show' do
+      response.should be_success
+    end
+  end
 end
+
