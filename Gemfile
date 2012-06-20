@@ -12,7 +12,11 @@ gem 'sqlite3'
 gem 'rspec-rails'
 
 group :test do
-  gem "nyan-cat-formatter"
+  gem 'nyan-cat-formatter'
+  gem 'guard-rspec'
+  gem 'spork', '~> 1.0rc'
+  gem 'guard-spork'
+  gem 'factory_girl_rails', '~> 3.4.0'
 end
 
 
