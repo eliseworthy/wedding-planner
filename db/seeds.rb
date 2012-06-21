@@ -5,3 +5,28 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+categories = Category.create([
+  {name: "Bridal Gown"},
+  {name: "Venue"},
+  {name: "Honeymoon"},
+  {name: "Ring"},
+  {name: "Bridesmaids"},
+  {name: "Decorations"},
+  {name: "Floral"},
+  {name: "Cake"},
+  {name: "Invitations"}
+])
+
+weddings = Wedding.create([
+  {name: "My beautiful Hawaiian Weddding", user_id: 1, description: "On the beach"},
+  {name: "Wedding in Scotland", user_id: 1, description: "Lots of beer!"},
+  {name: "My wedding on the moon", user_id: 1, description: "It'll happen someday"},
+  {name: "Wedding in the backyard", user_id: 1, description: "Going cheap"}
+  ])
+
+items = Item.create([
+  {name: "The most beautiful gown", wedding_id: weddings.first.id, category_id: categories.first.id, description: "I love it"},
+  {name: "Pricess-like", wedding_id: weddings.first.id, category_id: categories.first.id, description: "So pretty"},
+  {name: "Mom's dress", wedding_id: weddings.first.id, category_id: categories.first.id, description: "I'm going to get it updated"}
+  ])

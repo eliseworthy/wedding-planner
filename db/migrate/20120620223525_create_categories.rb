@@ -6,18 +6,4 @@ class CreateCategories < ActiveRecord::Migration
       t.timestamps
     end
   end
-
-  def up
-    Category.create([
-      {name: "Bridal Gown"},
-      {name: "Venue"},
-      {name: "Honeymoon"},
-      {name: "Ring"},
-      {name: "Bridesmaids"},
-      {name: "Decorations"},
-      {name: "Floral"},
-      {name: "Cake"},
-      {name: "Invitations"}
-    ])
-  end
 end
