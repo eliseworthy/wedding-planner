@@ -2,12 +2,18 @@ class ItemsController < ApplicationController
   respond_to :json
 
   def index
-    @category = Category.find(params[:category_id])
-    @items = @category.items.where(wedding_id: params[:wedding_id])
+    if @category = Category.find_by_id(params[:category_id])
+       if @items = @category.items.where(wedding_id: params[:wedding_id])
+      else render json: {error: "No items found"}, status: :not_found
+      end
+    else render json: {error: "Category not found"}, status: :not_found
+    end
   end
 
   def show
-    @item = Item.find(params[:id])
+    if @item = Item.find_by_id(params[:id])
+    else render json: {error: "Item not found"}, status: :not_found
+    end
   end
 
   def create
@@ -15,26 +21,28 @@ class ItemsController < ApplicationController
 
     if @item.save
       render json: @item, status: :created
-
     else
-      render json: @item.errors, status: :unprocessable_entity
+      render json: {error: "Unable to create new item"}, status: :unprocessable_entity
     end
   end
 
   def update
-    @item = Item.find(params[:id])
-
-    if @item.update_attributes(params[:item])
-      head :no_content
+    if @item = Item.find_by_id(params[:id])
+      if @item.update_attributes(params[:item])
+        head :no_content
+      else render json: {error: "Unable to update item"}, status: :unprocessable_entity
+      end
     else
-      render json: @item.errors, status: :unprocessable_entity
+      render json: {error: "Item not found"}, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @item = Item.find(params[:id])
-    @item.destroy
-
-    head :no_content
+    if @item = Item.find_by_id(params[:id])
+      @item.destroy
+      head :no_content
+    else 
+      render json: {error: "Unable to find this item; cannot delete it"}, status: :unprocessable_entity
+    end
   end
 end
