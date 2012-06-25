@@ -29,7 +29,7 @@ class WeddingsController < ApplicationController
   def update
     if @wedding = Wedding.find_by_id(params[:id])
       if @wedding.update_attributes(params[:wedding])
-        head :no_content
+        render json: @wedding
       else
         render json: {error: "Cannot update wedding"}, status: :unprocessable_entity
       end
