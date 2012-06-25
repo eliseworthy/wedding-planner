@@ -7,10 +7,52 @@ describe ItemsController do
   let!(:wedding) { item.wedding }
   let!(:category) { item.category }
 
+  # context 'index' do
+  #   context 'correct parameters' do
+  #     before(:each) do
+  #       get :index, :format => :json, wedding_id: wedding.id, category_id: category.id
+  #     end
+
+  #     it 'renders an index' do
+  #       response.should be_success
+  #     end
+
+  #     it 'returns an array of items' do
+  #       body = JSON.parse(response.body)
+  #       body.should == { "items" => [{ 
+  #         "id" => item.id,
+  #         "name" => item.name,
+  #         "description" => item.description,
+  #         "wedding_id" => item.wedding_id,
+  #         "created_at" => item.created_at.strftime('%FT%TZ')
+  #         }],
+  #         "category" => {
+  #           "id" => item.category.id,
+  #           "name" => item.category.name          
+  #         }}
+  #     end
+  #   end
+
+  #   context 'incorrect parameters' do
+  #     before(:each) do
+  #       get :index, :format => :json, wedding_id: wedding.id
+  #     end
+
+  #     it 'should throw a 404' do
+  #       response.status.should == 404 
+  #     end
+
+  #     it 'has an error message' do
+  #       body = JSON.parse(response.body)
+  #       body["error"].should == "Category not found"
+  #     end
+  #   end
+  # end
+
   context 'index' do
     context 'correct parameters' do
       before(:each) do
-        get :index, :format => :json, wedding_id: wedding.id, category_id: category.id
+        get :index, :format => :json, wedding_id: wedding.id
       end
 
       it 'renders an index' do
