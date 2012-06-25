@@ -22,10 +22,10 @@ weddings = Wedding.create([
   {name: "My beautiful Hawaiian Weddding", user_id: 1, description: "On the beach"},
   {name: "Wedding in Scotland", user_id: 1, description: "Lots of beer!"},
   {name: "My wedding on the moon", user_id: 1, description: "It'll happen someday"},
-  {name: "Wedding in the backyard", user_id: 1, description: "Going cheap"}
-  {name: "Wedding in the backyard 2", user_id: 1, description: "Going cheap"}
-  {name: "Wedding in the backyard 3", user_id: 1, description: "Going cheap"}
-  {name: "Wedding in the backyard 4", user_id: 1, description: "Going cheap"}
+  {name: "Wedding in the backyard", user_id: 1, description: "Going cheap"},
+  {name: "Wedding in the backyard 2", user_id: 1, description: "Going cheap"},
+  {name: "Wedding in the backyard 3", user_id: 1, description: "Going cheap"},
+  {name: "Wedding in the backyard 4", user_id: 1, description: "Going cheap"},
   {name: "Wedding in the backyard 5", user_id: 1, description: "Going cheap"}
   ])
 
