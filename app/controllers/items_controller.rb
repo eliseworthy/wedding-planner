@@ -3,7 +3,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.where(wedding_id: params[:wedding_id])
-    render json: {error: "Items not found for this wedding"}, status: :not_found if @items.empty?
   end
 
   def show

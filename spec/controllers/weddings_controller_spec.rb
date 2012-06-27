@@ -62,13 +62,13 @@ describe WeddingsController do
         get :index, :format => :json
       end
 
-      it 'has a 404 error code' do
-        response.status.should == 404
+      it 'has a 200 error code' do
+        response.status.should == 200
       end
 
-      it 'returns an error message' do
+      it 'returns an empty array' do
         body = JSON.parse(response.body)
-        body["error"].should == "No weddings found"
+        body.should == {"weddings" => []}
       end
     end
   end

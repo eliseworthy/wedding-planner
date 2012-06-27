@@ -31,18 +31,18 @@ describe ItemsController do
       end
     end
 
-    context 'incorrect parameters' do
+    context 'no wedding_id' do
       before(:each) do
         get :index, :format => :json, wedding_id: nil
       end
 
-      it 'should throw a 404' do
-        response.status.should == 404
+      it 'should be 200' do
+        response.status.should == 200
       end
 
-      it 'has an error message' do
+      it 'returns an empty array' do
         body = JSON.parse(response.body)
-        body["error"].should == "Items not found for this wedding"
+        body.should == {"items" => []}
       end
     end
   end

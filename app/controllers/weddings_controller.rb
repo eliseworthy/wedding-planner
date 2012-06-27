@@ -1,22 +1,8 @@
 class WeddingsController < ApplicationController
   respond_to :json
 
-    # def index
-  #   if @category = Category.find_by_id(params[:category_id])
-  #      if @items = @category.items.where(wedding_id: params[:wedding_id])
-  #     else render json: {error: "No items found"}, status: :not_found
-  #     end
-  #   else render json: {error: "Category not found"}, status: :not_found
-  #   end
-  # end
-
   def index
     @weddings = Wedding.where(params[:query]).to_a
-    if @weddings.empty?
-      render json: {error: "No weddings found"}, status: :not_found
-    else
-      @weddings
-    end
   end
 
   def show
