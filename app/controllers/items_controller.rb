@@ -1,17 +1,9 @@
 class ItemsController < ApplicationController
   respond_to :json
 
-  # def index
-  #   if @category = Category.find_by_id(params[:category_id])
-  #      if @items = @category.items.where(wedding_id: params[:wedding_id])
-  #     else render json: {error: "No items found"}, status: :not_found
-  #     end
-  #   else render json: {error: "Category not found"}, status: :not_found
-  #   end
-  # end
-
   def index
-    @items = Item.where(wedding_id: params[:wedding_id])  
+    @items = Item.where(wedding_id: params[:wedding_id])
+    render json: {error: "Items not found for this wedding"}, status: :not_found if @items.empty?
   end
 
   def show
@@ -45,7 +37,7 @@ class ItemsController < ApplicationController
     if @item = Item.find_by_id(params[:id])
       @item.destroy
       head :no_content
-    else 
+    else
       render json: {error: "Unable to find this item; cannot delete it"}, status: :unprocessable_entity
     end
   end

@@ -3,6 +3,10 @@ FactoryGirl.define do
     name "Wedding Name"
     description "A great zombie"
     user_id 1
+    factory :birds_wedding do
+      name "Birds Wedding"
+      user_id 2
+    end
   end
 
   factory :category do

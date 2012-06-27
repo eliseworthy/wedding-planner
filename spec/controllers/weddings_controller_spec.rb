@@ -3,28 +3,57 @@ require 'spec_helper'
 describe WeddingsController do
   render_views
 
-  let(:wedding) { FactoryGirl.create(:wedding) }
+  def json_wedding(wedding)
+    {
+      "id" => wedding.id,
+      "name" => wedding.name,
+      "description" => wedding.description,
+      "user_id" => wedding.user_id,
+      "created_at" => wedding.created_at.strftime('%FT%TZ')
+    }
+  end
 
+  let(:wedding)       { FactoryGirl.create(:wedding) }
+  let(:birds_wedding) { FactoryGirl.create(:birds_wedding) }
   context 'index' do
-    context 'with at least 1 wedding' do
-      before(:each) do
-        wedding
-        get :index, :format => :json
-      end
 
-      it 'renders an index' do
-        response.should be_success
-      end
+  context "search using params" do
+    before { wedding; birds_wedding }
 
-      it 'returns an array of weddings' do
-        body = JSON.parse(response.body)
-        body["weddings"].should eq [{ 
-          "id" => wedding.id,
-          "name" => wedding.name,
-          "description" => wedding.description,
-          "user_id" => wedding.user_id,
-          "created_at" => wedding.created_at.strftime('%FT%TZ')
-        }]
+    it "finds weddings from a user when given a user_id" do
+      get :index, query: {user_id: 1}, :format => :json
+      JSON.parse(response.body)["weddings"].should include json_wedding(wedding)
+    end
+
+    it "finds a wedding when given a name" do
+      get :index, query: {name: birds_wedding.name}, :format => :json
+      JSON.parse(response.body)["weddings"].should include json_wedding(birds_wedding)
+    end
+
+    it "doesn't find a wedding when given a different name" do
+      get :index, query: {name: birds_wedding.name}, :format => :json
+      JSON.parse(response.body)["weddings"].should_not include json_wedding(wedding)
+    end
+
+  end
+
+
+
+    context 'search without user id' do
+      context 'with at least 1 wedding' do
+        before(:each) do
+          wedding
+          get :index, :format => :json
+        end
+
+        it 'renders an index' do
+          response.should be_success
+        end
+
+        it 'returns an array of weddings' do
+          body = JSON.parse(response.body)
+          body["weddings"].should eq [json_wedding(wedding)]
+        end
       end
     end
 
@@ -57,7 +86,7 @@ describe WeddingsController do
 
       it 'returns a wedding hash' do
         body = JSON.parse(response.body)
-        body.should == { 
+        body.should == {
           "id" => wedding.id,
           "name" => wedding.name,
           "description" => wedding.description,
@@ -111,7 +140,7 @@ describe WeddingsController do
     context 'correct attributes' do
       it "locates the wedding" do
         put :update, id: wedding, wedding: Factory.attributes_for(:wedding)
-        assigns(:wedding).should eq(wedding) 
+        assigns(:wedding).should eq(wedding)
       end
 
       it "updates wedding's attributes" do
@@ -119,7 +148,7 @@ describe WeddingsController do
         wedding.reload
         wedding.description.should eq("Cool!")
       end
-    end  
+    end
 
     context "invalid attributes" do
       before(:each) do
@@ -147,7 +176,7 @@ describe WeddingsController do
       it "deletes the contact" do
         wedding
         expect{
-          delete :destroy, id: wedding       
+          delete :destroy, id: wedding
         }.to change(Wedding, :count).by -1
       end
     end
