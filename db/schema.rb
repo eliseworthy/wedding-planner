@@ -20,11 +20,11 @@ ActiveRecord::Schema.define(:version => 20120620223525) do
   end
 
   create_table "items", :force => true do |t|
-    t.string   "name"
     t.text     "description"
-    t.integer  "price"
+    t.string   "url"
+    t.string   "photo_url"
+    t.string   "location"
     t.integer  "wedding_id"
-    t.integer  "category_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

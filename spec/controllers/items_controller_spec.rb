@@ -5,7 +5,6 @@ describe ItemsController do
 
   let!(:item) { FactoryGirl.create(:item) }
   let!(:wedding) { item.wedding }
-  let!(:category) { item.category }
 
   context 'index' do
     context 'correct parameters' do
@@ -21,11 +20,12 @@ describe ItemsController do
         body = JSON.parse(response.body)
         body.should == { "items" => [{
           "id" => item.id,
-          "name" => item.name,
           "description" => item.description,
+          "url" => item.url,
+          "photo_url" => item.photo_url,
+          "location" => item.location,
           "wedding_id" => item.wedding_id,
           "created_at" => item.created_at.strftime('%FT%TZ'),
-          "category_id" => item.category_id
           }]
         }
       end
@@ -62,14 +62,12 @@ describe ItemsController do
         body = JSON.parse(response.body)
         body.should == {
           "id" => item.id,
-          "name" => item.name,
           "description" => item.description,
+          "url" => item.url,
+          "photo_url" => item.photo_url,
+          "location" => item.location,
           "wedding_id" => item.wedding_id,
           "created_at" => item.created_at.strftime('%FT%TZ'),
-          "category" => {
-            "id" => item.category.id,
-            "name" => item.category.name,
-          }
         }
       end
     end
@@ -95,14 +93,22 @@ describe ItemsController do
     context 'correct parameters' do
       it "should create a new item" do
         expect {
-          post :create, wedding_id: wedding.id, :item => { name: 'Pretty item', description: 'Pretty!', wedding_id: FactoryGirl.create(:wedding).id , category_id: FactoryGirl.create(:category).id }
+          post :create, wedding_id: wedding.id, :item => {
+            description: 'Pretty!',
+            photo_url:   "http://photo.jpg",
+            wedding_id:   FactoryGirl.create(:wedding).id
+           }
         }.to change(Item, :count).by 1
       end
     end
 
     context 'incorrect parameters' do
       before(:each) do
-        post :create, wedding_id: wedding.id, :item => { name: 'Pretty item', description: nil, wedding_id: FactoryGirl.create(:wedding).id , category_id: FactoryGirl.create(:category).id }
+        post :create, wedding_id: wedding.id, :item => {
+          photo_url: nil,
+          description: nil,
+          wedding_id: FactoryGirl.create(:wedding).id
+        }
       end
 
       it 'has a 422 status' do
@@ -120,7 +126,7 @@ describe ItemsController do
 
     context 'correct attributes' do
       before(:each) do
-        put :update, wedding_id: wedding.id, id: item, item: Factory.attributes_for(:item, description: "Cool!")
+        put :update, wedding_id: wedding.id, id: item, item: FactoryGirl.attributes_for(:item, description: "Cool!")
       end
       it "locates the item" do
         assigns(:item).should eq(item)
@@ -134,7 +140,7 @@ describe ItemsController do
 
     context "invalid attributes" do
       before(:each) do
-        put :update, wedding_id: wedding.id, id: item, item: Factory.attributes_for(:item, description: nil)
+        put :update, wedding_id: wedding.id, id: item, item: FactoryGirl.attributes_for(:item, description: nil)
       end
 
       it "does not change the item's attributes" do

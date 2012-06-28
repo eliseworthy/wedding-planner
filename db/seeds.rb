@@ -30,7 +30,7 @@ weddings = Wedding.create([
   ])
 
 items = Item.create([
-  {name: "The most beautiful gown", wedding_id: weddings.first.id, category_id: categories.first.id, description: "I love it"},
+  {description: "The most beautiful gown", wedding_id: weddings.first.id, category_id: categories.first.id, description: "I love it"},
   {name: "Pricess-like", wedding_id: weddings.first.id, category_id: categories.first.id, description: "So pretty"},
   {name: "Mom's dress", wedding_id: weddings.first.id, category_id: categories.first.id, description: "I'm going to get it updated"}
   ])

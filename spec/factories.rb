@@ -14,10 +14,8 @@ FactoryGirl.define do
   end
 
   factory :item do
-    name "Dress"
     description "The prettiest dress"
+    photo_url "http://3.bp.blogspot.com/_MFk42OQg7C4/SLlb8vEBmEI/AAAAAAAAAAM/wL1aaUa-f4Y/s400/white_bridal_gown.jpg"
     wedding
-    category
-    price 2999.99
   end
 end

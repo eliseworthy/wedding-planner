@@ -1,3 +1,3 @@
-json.items(@items.all, :id, :name, :description, :wedding_id, :created_at, :category_id)
+json.items(@items.all, :id, :description, :url, :photo_url, :location, :wedding_id, :created_at)
 
 

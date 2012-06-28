@@ -12,18 +12,8 @@ describe Item do
     item.should_not be_valid
   end
 
-  it "is not valid without a category_id" do
-    item.category_id = nil
-    item.should_not be_valid
-  end
-
-  it "is not valid without a name" do
-    item.name = nil
-    item.should_not be_valid
-  end
-
-  it "is not valid witha name over 256 characters" do
-    item.name = "x" * 257
+  it "is not valid without a photo_url" do
+    item.photo_url = nil
     item.should_not be_valid
   end
 
@@ -32,13 +22,13 @@ describe Item do
     item.should_not be_valid
   end
 
-  it "is not valid with a description over 256 characters" do
-    item.description = "x" * 257
-    item.should_not be_valid
+  it "has an optional url field" do
+    item.url = nil
+    item.should be_valid
   end
 
-  it "has an optional price field" do
-    item.price = nil
+  it "has an optional location field" do
+    item.location = nil
     item.should be_valid
   end
 end

@@ -139,12 +139,12 @@ describe WeddingsController do
   context 'update' do
     context 'correct attributes' do
       it "locates the wedding" do
-        put :update, id: wedding, wedding: Factory.attributes_for(:wedding)
+        put :update, id: wedding, wedding: FactoryGirl.attributes_for(:wedding)
         assigns(:wedding).should eq(wedding)
       end
 
       it "updates wedding's attributes" do
-        put :update, id: wedding, wedding: Factory.attributes_for(:wedding, description: "Cool!")
+        put :update, id: wedding, wedding: FactoryGirl.attributes_for(:wedding, description: "Cool!")
         wedding.reload
         wedding.description.should eq("Cool!")
       end
@@ -152,7 +152,7 @@ describe WeddingsController do
 
     context "invalid attributes" do
       before(:each) do
-        put :update, id: wedding, wedding: Factory.attributes_for(:wedding, description: nil)
+        put :update, id: wedding, wedding: FactoryGirl.attributes_for(:wedding, description: nil)
       end
 
       it "does not change the wedding's attributes" do
