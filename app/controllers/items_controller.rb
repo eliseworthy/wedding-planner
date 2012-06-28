@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(params[:item])
+    @item.image_from_url(@item.photo_url)
 
     if @item.save
       render json: @item, status: :created
