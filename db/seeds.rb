@@ -19,18 +19,18 @@ categories = Category.create([
 ])
 
 weddings = Wedding.create([
-  {name: "My beautiful Hawaiian Weddding", user_id: 1, description: "On the beach"},
-  {name: "Wedding in Scotland", user_id: 1, description: "Lots of beer!"},
-  {name: "My wedding on the moon", user_id: 1, description: "It'll happen someday"},
-  {name: "Wedding in the backyard", user_id: 1, description: "Going cheap"},
-  {name: "Wedding in the backyard 2", user_id: 1, description: "Going cheap"},
-  {name: "Wedding in the backyard 3", user_id: 1, description: "Going cheap"},
-  {name: "Wedding in the backyard 4", user_id: 1, description: "Going cheap"},
-  {name: "Wedding in the backyard 5", user_id: 1, description: "Going cheap"}
+  {name: "My dream Hawaiian Wedding", user_id: 1, description: "At sunset on the beach, bridesmaids in hawaiian dresses."},
+  {name: "Wedding in Scotland", user_id: 1, description: "Traditional wedding in an ancient church."},
+  {name: "Garden Wedding", user_id: 1, description: "Handmade accessories and lots of friends!"},
+  {name: "Mexico Wedding", user_id: 1, description: "Our closests family and friends at a resort."},
+  {name: "Ranch Wedding", user_id: 1, description: "Renting a farmhouse!"},
+  {name: "Chinese Wedding", user_id: 1, description: "We're going with two ceremonies: one western, one traditional!"},
+  {name: "Mansion Wedding", user_id: 1, description: "A beautiful summertime wedding."},
+  {name: "Wedding at the Science Center", user_id: 1, description: "With the dinosaurs!"}
   ])
 
 items = Item.create([
-  {description: "The most beautiful gown", wedding_id: weddings.first.id, category_id: categories.first.id, description: "I love it"},
-  {name: "Pricess-like", wedding_id: weddings.first.id, category_id: categories.first.id, description: "So pretty"},
-  {name: "Mom's dress", wedding_id: weddings.first.id, category_id: categories.first.id, description: "I'm going to get it updated"}
+  {description: "The most beautiful gown", wedding_id: weddings.first.id, photo_url: "http://media-cache-ec3.pinterest.com/upload/216102482089106321_z4dl8AIk.jpg"},
+  {description: "Love this headband!", wedding_id: weddings.first.id, photo_url: "http://media-cache-ec7.pinterest.com/upload/34128909646260764_XxdeRa4a.jpg"},
+  {description: "Beading ideas", wedding_id: weddings.first.id, photo_url: "http://media-cache-ec5.pinterest.com/upload/187673509442124237_WgMXqQeB.jpg"}
   ])
