@@ -1,1 +1,1 @@
-json.(@wedding, :id, :name, :description, :user_id, :created_at)
+json.(@wedding, :id, :name, :description, :user_id, :created_at, :photo_url)

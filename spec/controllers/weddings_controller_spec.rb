@@ -9,7 +9,8 @@ describe WeddingsController do
       "name" => wedding.name,
       "description" => wedding.description,
       "user_id" => wedding.user_id,
-      "created_at" => wedding.created_at.strftime('%FT%TZ')
+      "created_at" => wedding.created_at.strftime('%FT%TZ'),
+      "photo_url" => wedding.photo_url
     }
   end
 
@@ -91,7 +92,8 @@ describe WeddingsController do
           "name" => wedding.name,
           "description" => wedding.description,
           "user_id" => wedding.user_id,
-          "created_at" => wedding.created_at.strftime('%FT%TZ')
+          "created_at" => wedding.created_at.strftime('%FT%TZ'),
+          "photo_url" => wedding.photo_url
         }
       end
     end
