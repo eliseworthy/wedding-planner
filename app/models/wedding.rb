@@ -1,5 +1,5 @@
 class Wedding < ActiveRecord::Base
-  attr_accessible :description, :name, :user_id
+  attr_accessible :description, :name, :user_id, :photo_url
 
   has_many :items
 
@@ -7,7 +7,8 @@ class Wedding < ActiveRecord::Base
   validates :name, presence: true
   validates :user_id, presence: true
 
-  def photo_url
-    self.items.first ? self.items.first.photo_url : "https://s3.amazonaws.com/bride-items/wedding.jpeg"
+  def set_photo_url
+    self.photo_url = self.items.first ? self.items.first.photo_url : "https://s3.amazonaws.com/bride-items/wedding.jpeg"
+    self.save
   end
 end

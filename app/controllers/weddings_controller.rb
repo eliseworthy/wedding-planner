@@ -13,7 +13,7 @@ class WeddingsController < ApplicationController
 
   def create
     @wedding = Wedding.new(params[:wedding])
-
+    @wedding.set_photo_url
     if @wedding.save
       render json: @wedding, status: :created
     else

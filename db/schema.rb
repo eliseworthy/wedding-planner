@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120628193830) do
     t.string   "name"
     t.integer  "user_id"
     t.string   "description"
+    t.string   "photo_url"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

@@ -6,6 +6,7 @@ class Item < ActiveRecord::Base
 
   validates :wedding, presence: true
   validates :photo_url, presence: true
+  validates :description, presence: true
 
   has_attached_file :image,
                     storage:        :s3,

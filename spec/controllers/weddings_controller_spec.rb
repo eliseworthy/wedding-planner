@@ -121,7 +121,13 @@ describe WeddingsController do
           post :create, :wedding => { name: 'Pretty wedding', description: 'Pretty!', user_id: 1}
         }.to change(Wedding, :count).by 1
       end
+
+      it "should set a photo url" do
+        post :create, :wedding => { name: 'Pretty wedding', description: 'Pretty!', user_id: 1}
+        Wedding.last.photo_url.should_not be_nil
+      end
     end
+
     context "incorrect parameters" do
       before(:each) do
         post :create, :wedding => { name: nil, description: 'Pretty!', user_id: 1}
@@ -149,6 +155,12 @@ describe WeddingsController do
         put :update, id: wedding, wedding: FactoryGirl.attributes_for(:wedding, description: "Cool!")
         wedding.reload
         wedding.description.should eq("Cool!")
+      end
+
+      it "updates wedding's photo_url" do
+        put :update, id: wedding, wedding: FactoryGirl.attributes_for(:wedding, photo_url: "http://sample.com")
+        wedding.reload
+        wedding.photo_url.should eq("http://sample.com")
       end
     end
 
