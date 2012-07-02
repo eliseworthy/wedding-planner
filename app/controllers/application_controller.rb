@@ -7,6 +7,6 @@ class ApplicationController < ActionController::API
 
   def validate_key!
     user_key = UserKey.find_by_api_key(params[:api_key])
-    error(:forbidden) unless user_key
+    raise unless user_key
   end
 end
