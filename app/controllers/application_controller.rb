@@ -7,5 +7,5 @@ class ApplicationController < ActionController::API
     user_key = UserKey.find_by_api_key(params[:api_key])
     raise unless user_key
   end
-  helper_method: validate_key
+  helper_method :validate_key
 end
