@@ -1,5 +1,6 @@
 class WeddingsController < ApplicationController
   respond_to :json
+  before_filter :validate_key, :except => [:index, :show]
 
   def index
     @weddings = Wedding.where(params[:query]).to_a

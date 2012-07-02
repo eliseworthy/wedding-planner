@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   respond_to :json
+  before_filter :validate_key, :except => [:index, :show]
 
   def index
     @items = Item.where(wedding_id: params[:wedding_id])
