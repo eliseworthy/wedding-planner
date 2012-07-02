@@ -2,7 +2,7 @@ class UserKeysController < ApplicationController
 respond_to :json
 
   def create
-    @user_key = UserKey.new(params[:user_key])
+    @user_key = UserKey.new(params[:api_key])
     if @user_key.save
       render json: {notice: "API key accepted."}
     else
